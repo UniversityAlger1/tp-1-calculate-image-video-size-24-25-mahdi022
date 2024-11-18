@@ -9,35 +9,52 @@
 // Return value
 //   colored video size (based on the unit passed parametter)
 float video(int w, int h, int durationMovie, int durationCredits, int fps, char* unit) {
-   // Taille d'un cadre en couleur : 24 bits par pixel
-    float sizeColorFrameBits = (float)(w * h * 24);
+   // YOUR CODE HERE - BEGIN
+      float colored_image_size=3*w*h*fps*durationMovie;
+      float black_white_image_size=w*h*fps*durationCredits;
+      float video_size=colored_image_size*8+black_white_image_size*1;
 
-    // Taille d'un cadre en noir et blanc : 8 bits par pixel
-    float sizeGrayFrameBits = (float)(w * h * 8);
-
-    // Taille totale des sections
-    float totalColorBits = sizeColorFrameBits * fps * durationMovie;
-    float totalGrayBits = sizeGrayFrameBits * fps * durationCredits;
-
-    // Taille totale en bits
-    float totalSizeBits = totalColorBits + totalGrayBits;
-
-    // Conversion en fonction de l'unité demandée
-    float result = 0.0;
-    if (strcmp(unit, "bt") == 0) {
-        result = totalSizeBits; // En bits
-    } else if (strcmp(unit, "ko") == 0) {
-        result = totalSizeBits / 1000.0; // En kilobits
-    } else if (strcmp(unit, "mo") == 0) {
-        result = totalSizeBits / 1000000.0; // En mégabits
-    } else if (strcmp(unit, "go") == 0) {
-        result = totalSizeBits / 1000000000.0; // En gigabits
-    } else {
-        // Unité non reconnue
-        printf("Error: Invalid unit '%s'.\n", unit);
-        return 0; // Retourne immédiatement en cas d'erreur
-    }
- printf("The size of the video is: %.6f %s\n", result, unit);
-    
+      if(strcmp(unit, "bt") == 0){
+      return video_size/8;
+    }else if (strcmp(unit, "ko") == 0)
+    {
+      return (video_size/8)/1024;
+    }else if (strcmp(unit, "mo") == 0)
+    {
+      return ((video_size/8)/1024)/1024;
+    }else if (strcmp(unit, "go") == 0)
+    {
+      return (((video_size/8)/1024)/1024)/1024;
+    }else return video_size;
+   // YOUR CODE HERE - END
    return 0;
-}
+}/*
+int main() {
+    int width, height, durationMovie, durationCredits, fps;
+    char unit[10];
+
+    // Entrées utilisateur
+    printf("Entrez la largeur de l'image : ");
+    scanf("%d", &width);
+
+    printf("Entrez la hauteur de l'image : ");
+    scanf("%d", &height);
+
+    printf("Entrez la durée de la section couleur (en secondes) : ");
+    scanf("%d", &durationMovie);
+
+    printf("Entrez la durée de la section noir et blanc (en secondes) : ");
+    scanf("%d", &durationCredits);
+
+    printf("Entrez les FPS (Frames Per Second) : ");
+    scanf("%d", &fps);
+
+    printf("Entrez l'unité (bytes, KB, MB, GB) : ");
+    scanf("%s", unit);
+
+    // Calcul et affichage de la taille
+   printf("La taille de la vidéo est : %.2f %s\n", video(width, height, durationMovie, durationCredits, fps, unit), unit);
+    
+
+    return 0;
+}*/

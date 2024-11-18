@@ -5,8 +5,11 @@
 // Return value
 //   grayScale size of the image Bitmap (in byte)
 float grayScaleImage(int w, int h) {
-   // YOUR CODE HERE - BEGIN
+   // Calcul de la taille en octets
+    float sizeInBytes = (float)(w * h);
 
-   // YOUR CODE HERE - END
+    // Affiche la taille de l'image
+    printf("The size of the grayscale image is: %.2f bytes\n", sizeInBytes);
+
    return 0;
 }
